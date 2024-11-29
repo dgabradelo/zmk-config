@@ -1,0 +1,31 @@
+
+#define MIRYOKU_SHIFT_FUNCTION(NAME, BINDING, SHIFT_BINDING) \
+/ { \
+  behaviors { \
+    NAME: NAME { \
+      compatible = "zmk,behavior-mod-morph"; \
+      #binding-cells = <0>; \
+      bindings = <BINDING>, <SHIFT_BINDING>; \
+      mods = <(MOD_LSFT|MOD_RSFT)>; \
+    }; \
+  }; \
+};
+
+#define MIRYOKU_SHIFT_MACRO(NAME, BINDING, SHIFT_BINDING) \
+U_MACRO(u_macro_ ## NAME, wait-ms = <0>; bindings = <SHIFT_BINDING>;) \
+MIRYOKU_SHIFT_FUNCTION(NAME, BINDING, &u_macro_ ## NAME)
+
+MIRYOKU_SHIFT_MACRO(u_bt_sel_0, &bt BT_SEL 0, &bt BT_SEL 0 &bt BT_CLR)
+MIRYOKU_SHIFT_MACRO(u_bt_sel_1, &bt BT_SEL 1, &bt BT_SEL 1 &bt BT_CLR)
+MIRYOKU_SHIFT_MACRO(u_bt_sel_2, &bt BT_SEL 2, &bt BT_SEL 2 &bt BT_CLR)
+MIRYOKU_SHIFT_MACRO(u_bt_sel_3, &bt BT_SEL 3, &bt BT_SEL 3 &bt BT_CLR)
+MIRYOKU_SHIFT_MACRO(u_bt_sel_4, &bt BT_SEL 4, &bt BT_SEL 4 &bt BT_CLR)
+
+MIRYOKU_SHIFT_FUNCTION(u_out_tog, &out OUT_TOG, &out OUT_USB)
+
+MIRYOKU_SHIFT_FUNCTION(u_caps_word, &caps_word, &kp CAPS)
+
+MIRYOKU_SHIFT_FUNCTION(u_sat, U_RGB_SAI, U_RGB_SAD)
+MIRYOKU_SHIFT_FUNCTION(u_bri, U_RGB_BRI, U_RGB_BRD)
+MIRYOKU_SHIFT_FUNCTION(u_hue, U_RGB_HUI, U_RGB_HUD)
+MIRYOKU_SHIFT_FUNCTION(u_eff, U_RGB_EFF, U_RGB_EFR)
